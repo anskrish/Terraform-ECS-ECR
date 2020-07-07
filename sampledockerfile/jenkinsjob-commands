@@ -1,0 +1,7 @@
+
+docker build -t nginx:${BUILD_NUMBER} .
+docker tag nginx:${BUILD_NUMBER} 940453342989.dkr.ecr.us-east-2.amazonaws.com/nginx:${BUILD_NUMBER}
+docker push 940453342989.dkr.ecr.us-east-2.amazonaws.com/nginx:${BUILD_NUMBER}
+cd /root/IAC/role
+terraform init
+terraform apply -var="image=940453342989.dkr.ecr.us-east-2.amazonaws.com/nginx:${BUILD_NUMBER}" -auto-approve
